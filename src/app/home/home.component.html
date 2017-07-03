@@ -3,7 +3,11 @@
     <p>You're logged in with JWT!!</p>
     <div>
         Users from secure api end point:
-        {{ user }}
+        <ul>
+            <li *ngFor="let user of users.users">
+                {{ user.name }}
+            </li>
+        </ul>
     </div>
     <p><a [routerLink]="['/login']">Logout</a></p>
 </div>

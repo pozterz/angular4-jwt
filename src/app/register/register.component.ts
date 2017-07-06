@@ -4,15 +4,15 @@ import { Router } from '@angular/router'
 import { AuthenticationService } from '../_services/index'
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   model: any = {}
+  errors = ''
   loading = false
-  error = ''
 
   constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
@@ -20,17 +20,15 @@ export class LoginComponent implements OnInit {
     this.authenticationService.logout()
   }
 
-  login() {
-    this.loading = true
-    this.authenticationService.login(this.model.email, this.model.password) 
+  register() {
+    this.authenticationService.register(this.model.email, this.model.password, this.model.password_confirmation,this.model.name)
       .subscribe(result => {
-        if(result === true)
+        if(result == true) {
           this.router.navigate(['/'])
-        else
-          this.error = 'Email or Password is incorrect'
-          this.loading = false
+        } else {
+          console.log(result)
+        }
       })
-    
   }
 
 }
